@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-paper font-sans text-ink antialiased;
+        /* Subtle dark grid pattern */
+        background-image:
+            linear-gradient(rgba(41,189,212,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(41,189,212,0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    h1, h2, h3 {
+        @apply font-serif text-ink;
+    }
+
+    a {
+        @apply transition-colors duration-200;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0D0D0D; }
+    ::-webkit-scrollbar-thumb { background: #1E2E30; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #29BDD4; }
+}
+
+@layer components {
+    /* ---------- Cards ---------- */
+    .card-paper {
+        @apply bg-paper-100 border border-warm-border rounded-sm transition-all duration-300;
+    }
+    .card-paper:hover {
+        @apply border-sienna/40;
+        box-shadow: 0 0 16px rgba(41,189,212,0.12);
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn-primary {
+        @apply inline-flex items-center gap-2 bg-sienna text-paper px-5 py-2.5 text-sm font-medium tracking-wide rounded-sm
+               transition-all duration-200 hover:bg-sienna-300 active:scale-95;
+        box-shadow: 0 0 12px rgba(41,189,212,0.25);
+    }
+    .btn-primary:hover {
+        box-shadow: 0 0 20px rgba(41,189,212,0.45);
+    }
+    .btn-outline {
+        @apply inline-flex items-center gap-2 border border-sienna text-sienna px-5 py-2.5 text-sm font-medium tracking-wide rounded-sm
+               transition-all duration-200 hover:bg-sienna hover:text-paper active:scale-95;
+    }
+    .btn-ghost {
+        @apply inline-flex items-center gap-2 text-ink-100 px-3 py-1.5 text-sm font-medium rounded-sm
+               transition-all duration-200 hover:bg-paper-200 hover:text-ink active:scale-95;
+    }
+    .btn-danger {
+        @apply inline-flex items-center gap-2 bg-red-800 text-white px-4 py-2 text-sm font-medium rounded-sm
+               transition-all duration-200 hover:bg-red-700 active:scale-95;
+    }
+
+    /* ---------- Form inputs ---------- */
+    .form-label {
+        @apply block text-xs font-mono font-medium text-sienna uppercase tracking-widest mb-1.5;
+    }
+    .form-input {
+        @apply w-full bg-paper-200 border border-warm-border rounded-sm px-3.5 py-2.5 text-sm text-ink
+               placeholder-ink-50
+               focus:outline-none focus:ring-1 focus:ring-sienna focus:border-sienna
+               transition-colors duration-200;
+    }
+    .form-textarea {
+        @apply form-input resize-y min-h-[120px];
+    }
+    .form-error {
+        @apply mt-1 text-xs text-red-400 font-sans;
+    }
+
+    /* ---------- Section typography ---------- */
+    .section-eyebrow {
+        @apply text-xs font-mono text-sienna uppercase tracking-[0.2em] mb-2;
+    }
+    .section-title {
+        @apply font-serif text-3xl md:text-4xl font-semibold text-ink leading-tight;
+    }
+
+    /* ---------- Category chip / filter tab ---------- */
+    .cat-tab {
+        @apply px-4 py-1.5 text-sm font-medium border border-warm-border rounded-full
+               text-ink-100 bg-paper-100 transition-all duration-200 cursor-pointer
+               hover:border-sienna hover:text-sienna;
+    }
+    .cat-tab.active {
+        @apply bg-sienna text-paper border-sienna;
+        box-shadow: 0 0 12px rgba(41,189,212,0.3);
+    }
+
+    /* ---------- Admin sidebar link ---------- */
+    .sidebar-link {
+        @apply flex items-center gap-3 px-4 py-2.5 rounded-sm text-sm font-medium text-ink-100
+               transition-all duration-200 hover:bg-paper-200 hover:text-sienna;
+    }
+    .sidebar-link.active {
+        @apply bg-sienna/10 text-sienna border-l-2 border-sienna;
+    }
+
+    /* ---------- Cyan glow accent line ---------- */
+    .cyan-line {
+        @apply h-px bg-gradient-to-r from-transparent via-sienna to-transparent opacity-50;
+    }
+}
