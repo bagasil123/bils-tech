@@ -5,8 +5,52 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ $title ? $title . ' — ' : '' }}{{ optional($profile)->name ?? 'Portfolio' }}</title>
-    <meta name="description" content="{{ $metaDescription ?? (optional($profile)->description ? \Str::limit($profile->description, 155) : 'Portfolio pribadi seorang full-stack developer.') }}" />
+    @php
+        $pageTitle = ($title ? $title . ' — ' : '') . (optional($profile)->name ?? 'Portfolio');
+        $pageDesc = $metaDescription ?? (optional($profile)->description ? \Str::limit(strip_tags($profile->description), 155) : 'Portfolio pribadi seorang full-stack developer.');
+        $pageUrl = url()->current();
+        $pageImage = optional($profile)->photo ? url(Storage::url($profile->photo)) : asset('favicon.ico');
+        $authorName = optional($profile)->name ?? 'Bagas Ilham Saputro';
+    @endphp
+
+    <title>{{ $pageTitle }}</title>
+    
+    {{-- Primary Meta Tags --}}
+    <meta name="title" content="{{ $pageTitle }}" />
+    <meta name="description" content="{{ $pageDesc }}" />
+    <meta name="author" content="{{ $authorName }}" />
+    <meta name="keywords" content="Portfolio, Web Developer, Programmer, Full-stack Developer, {{ $authorName }}, Laravel, PHP" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="{{ $pageUrl }}" />
+
+    {{-- Open Graph / Facebook --}}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ $pageUrl }}" />
+    <meta property="og:title" content="{{ $pageTitle }}" />
+    <meta property="og:description" content="{{ $pageDesc }}" />
+    <meta property="og:image" content="{{ $pageImage }}" />
+    <meta property="og:site_name" content="{{ $authorName }}" />
+
+    {{-- Twitter --}}
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="{{ $pageUrl }}" />
+    <meta property="twitter:title" content="{{ $pageTitle }}" />
+    <meta property="twitter:description" content="{{ $pageDesc }}" />
+    <meta property="twitter:image" content="{{ $pageImage }}" />
+
+    {{-- Structured Data (JSON-LD) for Google --}}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Person",
+      "name": "{{ $authorName }}",
+      "url": "{{ url('/') }}",
+      "image": "{{ $pageImage }}",
+      "jobTitle": "Web Developer",
+      "description": "{{ $pageDesc }}"
+    }
+    </script>
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-paper text-ink">
