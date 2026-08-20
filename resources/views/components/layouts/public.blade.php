@@ -41,8 +41,8 @@
     {{-- Structured Data (JSON-LD) for Google --}}
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org/",
-      "@type": "Person",
+      "@@context": "https://schema.org/",
+      "@@type": "Person",
       "name": "{{ $authorName }}",
       "url": "{{ url('/') }}",
       "image": "{{ $pageImage }}",
